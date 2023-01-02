@@ -58,15 +58,21 @@ class Home extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Expanded(child: TextField(
-                      decoration: InputDecoration(
-                        focusColor: Colors.grey,
-                        hintText: 'message..',
-                      ),
-                    )),
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      child: const Expanded(child: TextField(
+                        decoration: InputDecoration(
+                          focusColor: Colors.grey,
+                          hintText: 'message..',
+                        ),
+                      )),
+                    ),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
+                        shape: CircleBorder(
+                          
+                        )
                       ),
                       onPressed: () {},
                       icon: const FaIcon(FontAwesomeIcons.paperPlane),
