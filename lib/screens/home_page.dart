@@ -1,3 +1,4 @@
+import 'package:chatroom_app/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,11 +18,11 @@ class Home extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text('demo'),
-                  const Text('demo'),
-                  const Text('demo'),
-                  const Text('demo'),
-                  const Text('demo'),
+                  Avatar(logo: FontAwesomeIcons.futbol),
+                  Avatar(logo: FontAwesomeIcons.code),
+                  Avatar(logo: FontAwesomeIcons.camera),
+                  Avatar(logo: FontAwesomeIcons.gamepad),
+                  Avatar(logo: FontAwesomeIcons.palette),
                 ],
               ),
             ),
@@ -51,13 +52,18 @@ class Home extends StatelessWidget {
                     shrinkWrap: true,
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                    return Text('hii');
+                    return const Text('hii');
                   }),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Expanded(child: const TextField()),
+                    const Expanded(child: TextField(
+                      decoration: InputDecoration(
+                        focusColor: Colors.grey,
+                        hintText: 'message..',
+                      ),
+                    )),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
