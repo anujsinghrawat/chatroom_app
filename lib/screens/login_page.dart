@@ -67,6 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
+                    UserName.setString(username.text);
+
                     Navigator.pushNamed(context, '/home');
                   },
                   icon: FaIcon(FontAwesomeIcons.arrowRight, size: 12),
@@ -83,5 +85,16 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+}
+
+class UserName {
+  static String? name;
+  static void setString(String newValue) {
+    name = newValue;
+  }
+
+  static String? getString() {
+    return name;
   }
 }
