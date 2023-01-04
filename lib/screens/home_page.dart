@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Home extends StatefulWidget {
-  Home({super.key});
+  String whichChat;
+  Home({super.key,required this.whichChat});
 
   @override
   State<Home> createState() => _HomeState();
@@ -13,7 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String? userName = UserName.getString();
-  String whichChat = 'code';
+  
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +29,16 @@ class _HomeState extends State<Home> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Avatar(logo: FontAwesomeIcons.futbol),
-                  Avatar(logo: FontAwesomeIcons.code),
-                  Avatar(logo: FontAwesomeIcons.camera),
-                  Avatar(logo: FontAwesomeIcons.gamepad),
-                  Avatar(logo: FontAwesomeIcons.palette),
+                  Avatar(logo: FontAwesomeIcons.futbol,route: '/home',channel: 'Football Channel', ),
+                  Avatar(logo: FontAwesomeIcons.code,route: '/home/code',channel: 'Code Channel',),
+                  Avatar(logo: FontAwesomeIcons.camera,route: '/home/photo',channel: 'Photography Club',),
+                  Avatar(logo: FontAwesomeIcons.gamepad ,route: '/home/game',channel: 'Gaming Channel ',),
+                  Avatar(logo: FontAwesomeIcons.palette,route: '/home/art',channel: 'Arts & Painting', ),
                 ],
               ),
             ),
           ),
-          Chat(whichChat: whichChat,),
+          Chat(whichChat: widget.whichChat,),
         ],
       )),
     );

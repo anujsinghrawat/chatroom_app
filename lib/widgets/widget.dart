@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Avatar extends StatelessWidget {
+  final String route;
+  final String channel;
   final IconData logo;
-  Avatar({Key? key, required this.logo});
+  Avatar(
+      {Key? key,
+      required this.logo,
+      required this.route,
+      required this.channel});
   @override
   Widget build(BuildContext context) {
-    return _buildAvatar(this.logo);
+    return _buildAvatar(context, this.logo, this.route, this.channel);
   }
 }
 
-Widget _buildAvatar(IconData logo) {
+Widget _buildAvatar(
+    BuildContext context, IconData logo, String route, String channel) {
   return Column(
     children: [
       const SizedBox(
@@ -22,20 +29,32 @@ Widget _buildAvatar(IconData logo) {
         child: IconButton(
           // back: Colors.grey,
           highlightColor: Colors.grey,
-          onPressed: () {},
-          icon: Align(widthFactor: 1.0,
-          heightFactor: 1.0,
-            child: FaIcon(logo)),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, route);
+            ChannelName.setString(channel);
+          },
+          icon: Align(widthFactor: 1.0, heightFactor: 1.0, child: FaIcon(logo)),
           style: IconButton.styleFrom(
-              padding: const EdgeInsets.all(3),
-              backgroundColor: Colors.grey,
-              ),
+            padding: const EdgeInsets.all(3),
+            backgroundColor: Colors.grey,
+          ),
         ),
       )
     ],
   );
 }
 
+//
+class ChannelName {
+  static String? name;
+  static void setString(String newValue) {
+    name = newValue;
+  }
+
+  static String? getString() {
+    return name;
+  }
+}
 
 class MessageTile extends StatelessWidget {
   final String message;
@@ -44,50 +63,40 @@ class MessageTile extends StatelessWidget {
   //  Avatar({Key? key, required this.logo});
   MessageTile({required this.message, required this.sendByMe});
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-          top: 8,
-          bottom: 8,
-          left: sendByMe ? 0 : 24,
-          right: sendByMe ? 24 : 0),
+          top: 8, bottom: 8, left: sendByMe ? 0 : 24, right: sendByMe ? 24 : 0),
       alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: sendByMe
             ? const EdgeInsets.only(left: 30)
             : const EdgeInsets.only(right: 30),
-        padding: const EdgeInsets.only(
-            top: 17, bottom: 17, left: 20, right: 20),
+        padding:
+            const EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
         decoration: BoxDecoration(
-            borderRadius: sendByMe ? const BorderRadius.only(
-                topLeft: Radius.circular(23),
-                topRight: Radius.circular(23),
-                bottomLeft: Radius.circular(23)
-            ) :
-            const BorderRadius.only(
-        topLeft: Radius.circular(23),
-          topRight: Radius.circular(23),
-          bottomRight: Radius.circular(23)),
+            borderRadius: sendByMe
+                ? const BorderRadius.only(
+                    topLeft: Radius.circular(23),
+                    topRight: Radius.circular(23),
+                    bottomLeft: Radius.circular(23))
+                : const BorderRadius.only(
+                    topLeft: Radius.circular(23),
+                    topRight: Radius.circular(23),
+                    bottomRight: Radius.circular(23)),
             gradient: LinearGradient(
-              colors: sendByMe ? [
-                const Color(0xff007EF4),
-                const Color(0xff2A75BC)
-              ]
-                  : [
-                const Color(0x1AFFFFFF),
-                const Color(0x1AFFFFFF)
-              ],
-            )
-        ),
+              colors: sendByMe
+                  ? [const Color(0xff007EF4), const Color(0xff2A75BC)]
+                  : [const Color(0x1AFFFFFF), const Color(0x1AFFFFFF)],
+            )),
         child: Text(message,
             textAlign: TextAlign.start,
             style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontFamily: 'OverpassRegular',
-            fontWeight: FontWeight.w300)),
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: 'OverpassRegular',
+                fontWeight: FontWeight.w300)),
       ),
     );
   }

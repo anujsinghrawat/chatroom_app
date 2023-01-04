@@ -57,7 +57,7 @@ class _ChatState extends State<Chat> {
           snapshot.docs.map((doc) => Message.fromJson(doc.data())).toList());
 
   Future createMessage(Message message) async {
-    final docUser = FirebaseFirestore.instance.collection('chat').doc();
+    final docUser = FirebaseFirestore.instance.collection(widget.whichChat!).doc();
     message.id = docUser.id;
     final json = message.toJson();
     await docUser.set(json);
@@ -76,8 +76,7 @@ class _ChatState extends State<Chat> {
               height: 60,
               padding: const EdgeInsets.all(10),
               color: Colors.black,
-              child: const Text(
-                'Channel Name',
+              child: Text(ChannelName.getString()!= null? ChannelName.getString()!:'Football Channel' ,
                 style: TextStyle(
                   fontSize: 24,
                 ),

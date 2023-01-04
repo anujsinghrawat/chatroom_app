@@ -29,7 +29,11 @@ class MyApp extends StatelessWidget {
       home: LoginPage(),
       routes: {
         '/splash': (context) => LoginPage(),
-        '/home': (context) => Home(),
+        '/home': (context) => Home(whichChat: 'chat',),
+        '/home/code': (context) => Home(whichChat: 'code',),
+        '/home/photo': (context) => Home(whichChat: 'photography',),
+        '/home/game': (context) => Home(whichChat: 'gaming',),
+        '/home/art': (context) => Home(whichChat: 'arts',),
 
 
       },
