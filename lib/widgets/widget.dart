@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Avatar extends StatelessWidget {
   final String route;
@@ -59,20 +60,22 @@ class ChannelName {
 class MessageTile extends StatelessWidget {
   final String message;
   final bool sendByMe;
+  final String user;
 
   //  Avatar({Key? key, required this.logo});
-  MessageTile({required this.message, required this.sendByMe});
+  MessageTile(
+      {required this.message, required this.sendByMe, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-          top: 8, bottom: 8, left: sendByMe ? 0 : 24, right: sendByMe ? 24 : 0),
+          top: 8, bottom: 8, left: sendByMe ? 0 : 20, right: sendByMe ? 20 : 0),
       alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: sendByMe
-            ? const EdgeInsets.only(left: 30)
-            : const EdgeInsets.only(right: 30),
+            ? const EdgeInsets.only(left: 20)
+            : const EdgeInsets.only(right: 20),
         padding:
             const EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
         decoration: BoxDecoration(
@@ -90,13 +93,25 @@ class MessageTile extends StatelessWidget {
                   ? [const Color(0xff007EF4), const Color(0xff2A75BC)]
                   : [const Color(0x1AFFFFFF), const Color(0x1AFFFFFF)],
             )),
-        child: Text(message,
-            textAlign: TextAlign.start,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontFamily: 'OverpassRegular',
-                fontWeight: FontWeight.w300)),
+        child: Column(
+          children: [
+            Text(
+              user,
+              textAlign: TextAlign.start,
+              style: GoogleFonts.roboto(
+                color: Colors.grey[400],
+                fontSize: 10,
+              ),
+            ),
+            Text(message,
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontFamily: 'OverpassRegular',
+                    fontWeight: FontWeight.w300)),
+          ],
+        ),
       ),
     );
   }
