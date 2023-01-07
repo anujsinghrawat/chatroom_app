@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -10,8 +11,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // ignore: unused_field
-  final username = TextEditingController();
+  // final username = TextEditingController();
+  late TextEditingController cont;
+  @override
+  void initState() {
+    super.initState();
+    cont = TextEditingController(text: 'anuj');
+  }
 
   void continueNow() {
     Navigator.pushNamed(context, '/home');
@@ -47,7 +53,8 @@ class _LoginPageState extends State<LoginPage> {
                   height: 15,
                 ),
                 TextField(
-                  controller: username,
+                  // controller: username,
+                  controller: cont,
                   decoration: const InputDecoration(
                       focusColor: Colors.grey,
                       prefixIcon: Align(
@@ -63,11 +70,16 @@ class _LoginPageState extends State<LoginPage> {
                       ))),
                 ),
                 const SizedBox(
+                  // child: Text(),
                   height: 10,
                 ),
                 ElevatedButton.icon(
-                  onPressed: () {
-                    UserName.setString(username.text);
+                  onPressed: () async {
+                    // UserName.setString(username.text);
+                    UserName.setString(cont.text);
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.setString('name', cont.text);
+                    cont.text = prefs.getString('name')!;
 
                     Navigator.pushNamed(context, '/home');
                   },

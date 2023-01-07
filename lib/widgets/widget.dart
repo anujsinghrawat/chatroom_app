@@ -26,7 +26,7 @@ Widget _buildAvatar(
       ),
       CircleAvatar(
         radius: 25,
-        // backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey,
         child: IconButton(
           // back: Colors.grey,
           highlightColor: Colors.grey,

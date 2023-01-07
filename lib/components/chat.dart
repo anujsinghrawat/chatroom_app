@@ -78,7 +78,7 @@ class _ChatState extends State<Chat> {
           children: [
             Container(
               width: 330,
-              height: 60,
+              height: 65,
               padding: const EdgeInsets.all(10),
               color: Colors.black,
               child: Text(
